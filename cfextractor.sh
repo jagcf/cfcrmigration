@@ -76,7 +76,7 @@ function1 () {
 
       #echo $row| jq -c '.stepsJson'
 
-  echo "next row no "$a
+  #echo "next row no "$a
   a=`expr $a + 1`
 
 if [ $a -eq 8 ]
@@ -97,7 +97,7 @@ fi
 #   echo 'excrted build_type_ref'
 
       if [ "$build_type_ref" != "{}" ]; then
-        echo ' build_type_ref looks good'
+        #echo ' build_type_ref looks good'
                     step_name=`echo $build_type_ref |jq  '.|keys[0]'`
                   
                     JSON_STRING=`echo  $build_type_ref |sed 's/\,/\^/g'`;
@@ -105,7 +105,7 @@ fi
                     nextpipoutput=$pip_id","$pip_name",build,"$step_name","$JSON_STRING
                     echo $nextpipoutput >> $2_pipidentification_Report.csv
       else
-                    echo "no build step found"$build_type_ref
+                    echo "no build step found"$build_type_ref >> cfcrregistrfinder.log
       fi
 
       if [ "$push_cfcr_type_ref" != "{}" ]; then
@@ -117,7 +117,7 @@ fi
 
                     echo $nextpipoutput >> $2_pipidentification_Report.csv
       else
-                   echo $push_cfcr_type_ref
+                   echo $push_cfcr_type_ref >> cfcrregistrfinder.log
       fi
    done
 #    exit 1
@@ -239,16 +239,26 @@ fi
 
   done
 
-
-}
-
-
-
-
-function1 $1 $2 $3
+  rm fil1.yaml
 
 
 }
+
+
+
+
+#function1 $1 $2 $3
+
+if [ $# -eq 3 ]; then
+   # echo "Your command line contains $# arguments"
+   function1 $1 $2 $3
+else
+    echo "usage ./cfextractor.sh API_KEY project_name pipeline_limit_count"
+    
+fi
+
+
+
 
 
 
