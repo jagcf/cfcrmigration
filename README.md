@@ -1,53 +1,57 @@
 # cfcf migration - pipeline identification
 
-One Paragraph of project description goes here
+This is sample script to find the pipelines impacted by the codefresh integreted registry, cfcr deprectation.
 
-## Getting Started
+More about CFCR registry decomssionsing - https://codefresh.io/docs/docs/docker-registries/cfcr-deprecation/
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+## script logic
 
-### Prerequisites
+This script identifies the various pipelins in the following order.
 
-What things you need to install the software and how to install them
+1. Find metadata for all pipelines under an account using the restapi.
 
-```
-Give examples
-```
+2. Breakdown metada into 2 buckets
+     2.1 Inline Pipeline Spec metada
+     2.2 Pipelines with step definition in a repo.
+     
+3. Inspect all the inline steps for the following steps types.
+ 
+     3.1 build steps using codefresh type:build
+     
+     3.2 push types using codefresh type:push and registry:'crcf'
+     
+     collect the pipeline and steps details of those pipelines fulfilling the 3.1 and 3.2 into an output csv report file.
+     
+4. Inspect those pipelines, not having inline steps definiton and the yaml stored in a repo..
+    
+      4.1 Retreive the pipeline definion from the repo and convert into a json format.
+      
+      4.2 build steps using codefresh type:build
+     
+      4.3 push types using codefresh type:push and registry:'crcf'
+     
+     collect the pipeline and steps details of those pipelines fulfilling the 3.1 and 3.2 into an output csv report file.
+      
+    
 
-### Installing
+### How to run the script
 
-A step by step series of examples that tell you how to get a development env running
+You can run the script passing the codefresh account API key, shorthand for your account name  and the limit to restrict the no of repo pipeline to process.
 
-Say what the step will be
-
-```
-Give the example
-```
-
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
-
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
+E.g 
 
 ```
-Give an example
+./cfextractor.sh api-key cfdemo 10
 ```
+
+### Output
+
+Script will generate a number pipeline files into a directory by name cfpips.
+
+Along with an execution log and errlog files, the key file that you should look out for is an output csv file containing the report of all the impacted pieplines.
+
+E.g 
+```
+cfdemo_pipidentification_Report.csv
+```
+
