@@ -1,4 +1,4 @@
-# cfcf migration - pipeline identification
+# cfcf migration test- pipeline identification
 
 This is a sample script to find all pipelines under a codefresh account impacted by  codefresh integreted registry, cfcr deprectation.
 
