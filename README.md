@@ -48,6 +48,15 @@ To run this script install node.js and then run as follows
 ```
 ./node CFCRpipidentifier.js
 ```
+  A dcoker image available which you can run and generate the output, if you don'nt wnat install and run the nodejs 
+
+How to Run | parameters | parameter description
+------------ | -------------
+1. using prebuilt docer image | Content from cell 2
+mkdir ~/cfoutput
+docker run -e APIKEY="yourAPIkeyhere" -v ~/cfoutput:/output cfcrregpips:latest |APIKEY ,~/cfoutput | APIKEY - Your account APIKey , ~/cfoutput your host machine folder mounted to docer porcess to generate the output files.
+
+2. ./node CFCRpipidentifier.js | apikey | account acpi key
 
 ### Output
 
