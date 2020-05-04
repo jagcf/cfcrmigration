@@ -17,7 +17,7 @@ if (!process.env.APIKEY && !process.env.XACCESSTOKEN) {
     process.exit(1);
 }
 
-const outputfolder = process.env.outputfolder || '/output'
+const outputfolder = process.env.outputfolder || './output'
 
 console.log("outputfolder -->", outputfolder)
 const Logger = require('./winstonlogger')
