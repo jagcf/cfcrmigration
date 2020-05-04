@@ -40,7 +40,7 @@ This script identifies the various pipelines in the following order.
 
 ### How to run the script
 
-You can run the script passing the codefresh account API key as an env to this process by keeping it is .env file.
+You can run this script as a node js script using node cli, passing the codefresh account API key as an env value by keeping it in .env file.
 
 To run this script install node.js and then run as follows
 
